@@ -29,13 +29,13 @@
     p.indent("  ")
 
     if project.iscpp(prj) or project.isc(prj) then
-        p.generate(prj, path.join(prj.location, "/.vscode/c_cpp_properties.json"), vscode.project.generateC_CppProperties)
-        p.generate(prj, path.join(prj.location, "/.vscode/settings.json"), vscode.project.generateSettings)
-        p.generate(prj, path.join(prj.location, "/.vscode/tasks.json"), vscode.project.generateTasks)
+        p.generate(prj, path.join(prj.location, ".vscode/c_cpp_properties.json"), vscode.project.generateC_CppProperties)
+        p.generate(prj, path.join(prj.location, ".vscode/settings.json"), vscode.project.generateSettings)
+        p.generate(prj, path.join(prj.location, ".vscode/tasks.json"), vscode.project.generateTasks)
 
        
         if prj.kind == "ConsoleApp" then
-            p.generate(prj, prj.location .. "/.vscode/launch.json", vscode.project.generateLaunch)
+            p.generate(prj, path.join(prj.location , ".vscode/launch.json"), vscode.project.generateLaunch)
         end
       
     end
