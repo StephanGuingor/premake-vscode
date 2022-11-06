@@ -47,7 +47,7 @@ function m.generateTasks(prj)
                     
                     -- if windows then
                     p.push('"windows": {')
-                        p.w('"command": "mingw32-make",')
+                        p.w('"command": "mingw32-make"')
                     p.pop('},')
                     -- end
 
@@ -62,6 +62,10 @@ function m.generateTasks(prj)
 
                     p.w('"' .. problemMatcher .. '",')
 
+                    p.pop('],')
+
+                    p.push('"args": [')
+                        p.w('"config=%s"', string.lower(cfg.buildcfg))
                     p.pop('],')
 
                     p.push('"group": {')
@@ -101,7 +105,7 @@ function m.generateLaunch(prj)
                     p.w('"externalConsole": false,')
                     p.w('"MIMode": "gdb",')
                     p.w('"miDebuggerPath": "/usr/bin/gdb",')
-                    p.w('"setupCommands": [')
+                    p.push('"setupCommands": [')
                         p.push('{')
                             p.w('"description": "Enable pretty-printing for gdb",')
                             p.w('"text": "-enable-pretty-printing",')
@@ -160,7 +164,7 @@ function m.generateC_CppProperties(prj)
                         p.w('"intelliSenseMode": "gcc-x64",')
                     end
 
-                    p.w('"configurationProvider": "ms-vscode.cmake-tools",')
+                    p.w('"configurationProvider": "ms-vscode.makefile-tools",')
 
                 p.pop("},")
             end
@@ -184,9 +188,9 @@ function m.generateExtensions(prj)
     p.utf8()
 
     p.push('{')
-        p.w('"recommendations": [')
+        p.push('"recommendations": [')
             p.w('"ms-vscode.cpptools",')
-            p.w('"ms-vscode.cmake-tools"')
+            p.w('"ms-vscode.makefile-tools"')
 
             if toolset == "nvcc" then
                 p.w('"nvidia.nsight-vscode-edition"')

@@ -31,7 +31,7 @@ newaction
 
     onInitialize = function()
         require("gmake")
-        p.modules.gmake.initialize()
+        -- p.modules.gmake.initialize()
     end,
 
 	-- Workspace and project generation logic

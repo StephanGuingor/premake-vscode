@@ -32,6 +32,7 @@
         p.generate(prj, path.join(prj.location, ".vscode/c_cpp_properties.json"), vscode.project.generateC_CppProperties)
         p.generate(prj, path.join(prj.location, ".vscode/settings.json"), vscode.project.generateSettings)
         p.generate(prj, path.join(prj.location, ".vscode/tasks.json"), vscode.project.generateTasks)
+        p.generate(prj, path.join(prj.location, ".vscode/extensions.json"), vscode.project.generateExtensions)
 
        
         if prj.kind == "ConsoleApp" then
