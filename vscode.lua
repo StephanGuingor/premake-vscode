@@ -14,10 +14,7 @@
     local project = p.project
 
     function vscode.generateWorkspace(wks)
-        p.eol("\r\n")
-        p.indent("  ")
-
-        p.generate(wks, ".code-workspace", vscode.workspace.generate)
+        print("Generating VSCode workspace")
     end
     
     function vscode.generateProject(prj)
@@ -26,9 +23,9 @@
 
     if project.iscpp(prj) or project.isc(prj) then
         p.generate(prj, prj.location .. '/' .. prj.name .. "/.vscode/c_cpp_properties.json", vscode.project.generateC_CppProperties)
-        p.generate(prj, prj.location .. '/' .. prj.name .. "/.vscode/tasks.json", vscode.project.generateLaunch)
-        p.generate(prj, prj.location .. '/' .. prj.name .. "/.vscode/launch.json", vscode.project.generateSettings)
-        p.generate(prj,prj.location .. '/' .. prj.name .. "/.vscode/settings.json", vscode.project.generateTasks)
+        p.generate(prj, prj.location .. '/' .. prj.name .. "/.vscode/launch.json", vscode.project.generateLaunch)
+        p.generate(prj, prj.location .. '/' .. prj.name .. "/.vscode/settings.json", vscode.project.generateSettings)
+        p.generate(prj, prj.location .. '/' .. prj.name .. "/.vscode/tasks.json", vscode.project.generateTasks)
     end
     end
 
