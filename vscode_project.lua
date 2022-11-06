@@ -45,9 +45,9 @@ function m.generateTasks(prj)
                     p.pop('},')
                     -- end
 
-                    p.push('"args": [')
-                        p.w('"' .. string.lower(cfg.buildcfg) .. '"')
-                    p.pop('],')
+                    -- p.push('"args": [')
+                    --     p.w('"' .. string.lower(cfg.buildcfg) .. '"')
+                    -- p.pop('],')
 
                     p.push('"problemMatcher": [')
 
@@ -86,8 +86,12 @@ function m.generateLaunch(prj)
                 p.push('{')
                     p.w('"name": "%s %s",', cfg.buildtarget.name, cfg.buildcfg)
                     p.w('"type": "cppdbg",')
+
+                    -- build target directory relative to workspace
+                    local buildTargetDir = path.getrelative(prj.location, cfg.buildtarget.directory)
+                    p.w('"program": "%s/%s",', buildTargetDir, cfg.buildtarget.name)
+
                     p.w('"request": "launch",')
-                    p.w('"program": "${workspaceFolder}/%s/%s",', cfg.buildcfg, cfg.buildtarget.name)
                     p.w('"args": [],')
                     p.w('"stopAtEntry": false,')
                     p.w('"cwd": "${workspaceFolder}",')

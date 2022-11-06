@@ -1,4 +1,4 @@
-Premake extension to support the VSCODE IDE
+Premake extension to support the VSCODE IDE with C/C++ projects and Makefiles.
 
 Features
 Support for C/C++ language projects
