@@ -1,5 +1,5 @@
 --
--- Name:        _preload.lua
+-- Name:        vscode.lua
 -- Purpose:     Define the vscode action.
 -- Author:      Stephan Guingor
 -- Created:     2022/11/06
@@ -29,10 +29,15 @@
     p.indent("  ")
 
     if project.iscpp(prj) or project.isc(prj) then
-        p.generate(prj, prj.location .. "/.vscode/c_cpp_properties.json", vscode.project.generateC_CppProperties)
-        p.generate(prj, prj.location .. "/.vscode/launch.json", vscode.project.generateLaunch)
-        p.generate(prj, prj.location .. "/.vscode/settings.json", vscode.project.generateSettings)
-        p.generate(prj, prj.location .. "/.vscode/tasks.json", vscode.project.generateTasks)
+        p.generate(prj, path.join(prj.location, "/.vscode/c_cpp_properties.json"), vscode.project.generateC_CppProperties)
+        p.generate(prj, path.join(prj.location, "/.vscode/settings.json"), vscode.project.generateSettings)
+        p.generate(prj, path.join(prj.location, "/.vscode/tasks.json"), vscode.project.generateTasks)
+
+       
+        if prj.kind == "ConsoleApp" then
+            p.generate(prj, prj.location .. "/.vscode/launch.json", vscode.project.generateLaunch)
+        end
+      
     end
 
     p.escaper(p.modules.gmake.esc)

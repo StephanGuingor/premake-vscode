@@ -1,3 +1,9 @@
+--
+-- Name:        vscode_project.lua
+-- Purpose:     Define the vscode action.
+-- Author:      Stephan Guingor
+-- Created:     2022/11/06
+--
 
 local p = premake
 local tree = p.tree
@@ -44,10 +50,6 @@ function m.generateTasks(prj)
                         p.w('"command": "mingw32-make",')
                     p.pop('},')
                     -- end
-
-                    -- p.push('"args": [')
-                    --     p.w('"' .. string.lower(cfg.buildcfg) .. '"')
-                    -- p.pop('],')
 
                     p.push('"problemMatcher": [')
 
