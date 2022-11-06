@@ -5,6 +5,9 @@
 
 2. Add the line `require "vscode"` preferably to your [premake-system.lua](https://github.com/premake/premake-core/wiki/System-Scripts), or to your premake5.lua script.
 
+For cuda support, add `require "premake5-cuda"` to your premake5.lua script and copy the plugins/premake5-cuda folder to your project.
+More information about the cuda support can be found [here](https://github.com/theComputeKid/premake5-cuda).
+
 3. Generate 
 ```sh
 

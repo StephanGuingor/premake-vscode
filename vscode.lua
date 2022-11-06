@@ -18,10 +18,10 @@
 
         p.utf8()
 
-        p.escaper(p.modules.gmake.esc)
+        p.escaper(p.modules.gmake2.esc)
 		wks.projects = table.filter(wks.projects, function(prj) return p.action.supports(prj.kind) and prj.kind ~= p.NONE end)
 
-		p.generate(wks, p.modules.gmake.getmakefilename(wks, false), p.modules.gmake.generate_workspace)
+		p.generate(wks, p.modules.gmake2.getmakefilename(wks, false), p.modules.gmake2.generate_workspace)
     end
     
     function vscode.generateProject(prj)
@@ -41,22 +41,22 @@
       
     end
 
-    p.escaper(p.modules.gmake.esc)
+    p.escaper(p.modules.gmake2.esc)
 	
     -- Generate makefile
-    p.generate(prj, p.modules.gmake.getmakefilename(prj, true), p.modules.gmake.cpp.generate)
+    p.generate(prj, p.modules.gmake2.getmakefilename(prj, true), p.modules.gmake2.cpp.generate)
     end
 
     function vscode.cleanWorkspace(wks)
     p.clean.file(wks, wks.name .. ".code-workspace")
 
-    p.clean.file(wks, p.modules.gmake.getmakefilename(wks, false))
+    p.clean.file(wks, p.modules.gmake2.getmakefilename(wks, false))
     end
 
     function vscode.cleanProject(prj)
         p.clean.file(prj, prj.name .. ".vscode")
 
-        p.clean.file(prj, p.modules.gmake.getmakefilename(prj, true))
+        p.clean.file(prj, p.modules.gmake2.getmakefilename(prj, true))
     end
 
     include("vscode_workspace.lua")

@@ -24,6 +24,12 @@ function m.getCompiler(cfg)
     return toolset
 end
 
+function m.cudaSupport(cfg)
+    if cfg.cudaFiles ~= nil then
+        return true
+    end
+end
+
 function m.getTaskName(cfg)
     local taskName = "Build " .. cfg.buildtarget.name .. " (" .. cfg.buildcfg .. ")"
     
@@ -52,11 +58,11 @@ function m.generateTasks(prj)
                     -- end
 
                     p.push('"problemMatcher": [')
-
+                    
                     local toolset = m.getCompiler(cfg)
                     local problemMatcher = "$gcc"
 
-                    if toolset == "nvcc" then
+                    if m.cudaSupport(cfg) then
                         problemMatcher = "$nvcc"
                     end
 
@@ -181,6 +187,7 @@ function m.generateSettings(prj)
     
 end
 
+
 --
 -- Project: Generate vscode extensions.json.
 --
@@ -190,10 +197,14 @@ function m.generateExtensions(prj)
     p.push('{')
         p.push('"recommendations": [')
             p.w('"ms-vscode.cpptools",')
-            p.w('"ms-vscode.makefile-tools"')
+            p.w('"ms-vscode.makefile-tools",')
 
-            if toolset == "nvcc" then
-                p.w('"nvidia.nsight-vscode-edition"')
+            -- if any cuda files then
+            for cfg in project.eachconfig(prj) do
+                if m.cudaSupport(cfg) then
+                   p.w('"nvdia.nsight-vscode-edition"')
+                   break
+                end
             end
 
         p.pop(']')

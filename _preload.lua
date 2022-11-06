@@ -30,8 +30,8 @@ newaction
 	},
 
     onInitialize = function()
-        require("gmake")
-        -- p.modules.gmake.initialize()
+        require("gmake2")
+        p.modules.gmake2.cpp.initialize()
     end,
 
 	-- Workspace and project generation logic
